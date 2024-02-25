@@ -2,12 +2,13 @@
   "name": "ws_task",
   "version": "1.0.0",
   "description": "Template for the WebSocket remote control task",
-  "main": "index.js",
-  "type": "module",
+  "main": "index.ts",
   "scripts": {
-    "start": "node ./index.js",
-    "start:dev": "nodemon ./index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node ./index.ts",
+    "start:dev": "nodemon ./index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint \"src/**/*.ts\" --fix"
   },
   "author": "Yauheni Melnik",
   "keywords": [
@@ -18,6 +19,7 @@
   ],
   "license": "ISC",
   "devDependencies": {
+    "@types/ws": "^8.5.10",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "@typescript-eslint/parser": "^5.60.0",
     "eslint": "^8.43.0",
