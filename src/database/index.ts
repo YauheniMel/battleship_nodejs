@@ -29,8 +29,25 @@ export class DataBase {
     return this._rooms.filter((room) => room.roomUsers.length === 1);
   }
 
-  createUser(userCredentials: IUserCredentials): IUser {
-    const newUser = { ...userCredentials, index: this._users.length, wins: 0 };
+  createUser(userCredentials?: IUserCredentials): IUser {
+    let newUser = {
+      password: '',
+      name: '',
+      index: -1,
+      wins: 0,
+    };
+
+    if (!userCredentials) {
+      newUser = {
+        ...newUser,
+        name: 'Bot_' + this._users.length,
+        index: this._users.length,
+        wins: 0,
+      };
+    } else {
+      newUser = { ...userCredentials, index: this._users.length, wins: 0 };
+    }
+
     this._users.push(newUser);
 
     return { name: newUser.name, index: newUser.index };
@@ -45,6 +62,8 @@ export class DataBase {
     };
 
     this._rooms.push(createdRoom);
+
+    return createdRoom.roomId;
   }
 
   updateRoom(updatedRoom: IRoom) {
@@ -58,7 +77,7 @@ export class DataBase {
 
     const enemyId = (targetRoom.roomUsers[0] as IUser).index;
 
-    if (enemyId === userId) return [];
+    if (enemyId === userId) throw new Error('You are already in this room!');
 
     const user = this.getUserById(userId);
 

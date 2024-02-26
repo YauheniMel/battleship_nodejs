@@ -36,13 +36,19 @@ export interface IShip {
   type: 'small' | 'medium' | 'large' | 'huge';
 }
 
+export interface IAttackHistoryUnit {
+  x: number;
+  y: number;
+  status: 'miss' | 'killed' | 'shot';
+  direction?: boolean;
+  left?: number;
+  length?: number;
+}
+
 export interface IPlayerTable {
   userId: number;
   ships: IShip[];
-  attacks: {
-    x: number;
-    y: number;
-  }[];
+  attacks: IAttackHistoryUnit[];
 }
 
 export interface IGame {
@@ -74,6 +80,7 @@ export enum RequestTypeEnum {
   add_ships = 'add_ships',
   attack = 'attack',
   randomAttack = 'randomAttack',
+  single_play = 'single_play',
 }
 
 export declare class IdentifiedWebSocket extends WebSocket {

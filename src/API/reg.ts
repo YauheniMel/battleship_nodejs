@@ -13,7 +13,7 @@ export const reg = (
 
     const createdUser = DB.createUser(userCredentials);
 
-    if (createdUser.index) ws.clientId = createdUser.index;
+    if (typeof createdUser.index === 'number') ws.clientId = createdUser.index;
 
     ws.send(helpers.reg({ ...createdUser, error: false, errorText: '' }));
 

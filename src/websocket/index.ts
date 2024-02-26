@@ -49,11 +49,11 @@ wss.on('connection', (ws: IdentifiedWebSocket) => {
         const parsedData = JSON.parse(parsedRequest.data) as IPlayerGame;
 
         API.randomAttack(parsedData);
+      } else if (parsedRequest.type === RequestTypeEnum.single_play) {
+        API.single_play(ws);
       }
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        console.error(err.message);
-      }
+      if (err instanceof Error) console.error(err);
     }
   });
 });
